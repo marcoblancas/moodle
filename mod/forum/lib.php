@@ -795,9 +795,10 @@ function forum_cron() {
                     $eventdata->set_additional_content('email', $additionalcontent);
                 }
 
-                // If forum_replytouser is not set then send mail using the noreplyaddress.
+                // If forum_replytouser is not set then is like if the userfrom has set in his profile
+                // Email display = Hide my email address for everyone
                 if (empty($CFG->forum_replytouser)) {
-                    $eventdata->userfrom = core_user::get_noreply_user();
+                    $eventdata->userfrom->maildisplay='0';
                 }
 
                 $smallmessagestrings = new stdClass();
