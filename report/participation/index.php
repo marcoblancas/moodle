@@ -104,10 +104,10 @@ $minloginternalreader = 0; // Time of first record in sql_internal_table_reader.
 
 if ($onlyuselegacyreader) {
     // If no sql_inrenal_reader enabled then get min. time from log table.
-    $minlog = $DB->get_field_sql('SELECT min(time) FROM {log} WHERE course = ?', array($course->id));
+    $minlog = $DB->get_field_sql('SELECT min(time) FROM {log}');
 } else {
     $uselegacyreader = true;
-    $minlog = $DB->get_field_sql('SELECT min(time) FROM {log} WHERE course = ?', array($course->id));
+    $minlog = $DB->get_field_sql('SELECT min(time) FROM {log}');
 
     // If legacy reader is not logging then get data from new log table.
     // Get minimum log time for this course from preferred log reader.
