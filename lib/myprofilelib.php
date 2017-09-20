@@ -132,6 +132,9 @@ function core_myprofile_navigation(core_user\output\myprofile\tree $tree, $user,
     } else {
         $identityfields = array();
     }
+    if (has_capability('moodle/user:viewalldetails', $courseorusercontext)) {
+        $identityfields = array('idnumber' => 0, 'email' => 1, 'phone1' => 2, 'phone2' => 3, 'department' => 4, 'institution' => 5);
+    }
 
     if (is_mnet_remote_user($user)) {
         $sql = "SELECT h.id, h.name, h.wwwroot,
