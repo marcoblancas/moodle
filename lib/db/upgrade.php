@@ -3992,5 +3992,18 @@ function xmldb_main_upgrade($oldversion) {
         upgrade_main_savepoint(true, 2019111805.12);
     }
 
+    if ($oldversion < 2019111805.16) {
+
+        // Add phone1,phone2,institution,department,idnumber,address as hiddenuserfields.
+        if (empty($CFG->hiddenuserfields)) {
+            set_config('hiddenuserfields', 'phone1,phone2,institution,department,idnumber,address');
+        } else {
+            set_config('hiddenuserfields', $CFG->hiddenuserfields . ',phone1,phone2,institution,department,idnumber,address');
+        }
+
+        // Main savepoint reached.
+        upgrade_main_savepoint(true, 2019111805.16);
+    }
+
     return true;
 }
