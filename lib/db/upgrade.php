@@ -2998,5 +2998,18 @@ function xmldb_main_upgrade($oldversion) {
     // Automatically generated Moodle v3.10.0 release upgrade line.
     // Put any upgrade step following this.
 
+    if ($oldversion < 2020111500.01) {
+
+        // Add phone1,phone2,institution,department,idnumber,address as hiddenuserfields.
+        if (empty($CFG->hiddenuserfields)) {
+            set_config('hiddenuserfields', 'phone1,phone2,institution,department,idnumber,address');
+        } else {
+            set_config('hiddenuserfields', $CFG->hiddenuserfields . ',phone1,phone2,institution,department,idnumber,address');
+        }
+
+        // Main savepoint reached.
+        upgrade_main_savepoint(true, 2020111500.01);
+    }
+
     return true;
 }
